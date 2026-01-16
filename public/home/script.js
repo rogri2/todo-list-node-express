@@ -35,14 +35,11 @@ async function toggleTask(id, checkbox) {
   });
 
   const updatedTask = await res.json();
-  console.log('Updated task:', updatedTask);
   checkbox.checked = updatedTask.completed;
 }
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  console.log('title', taskName.value);
-  console.log('description', taskDescription.value);
   const data = {
     title: taskName.value,
     description: taskDescription.value,
