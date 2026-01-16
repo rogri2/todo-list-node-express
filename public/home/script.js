@@ -1,7 +1,5 @@
 const API_URL = '/api/tasks';
 
-const taskNameError = document.getElementById('taskNameError');
-const taskDeleteButton = document.getElementsByClassName('taskDelete');
 const form = document.getElementById('taskForm');
 const list = document.getElementById('taskList');
 
