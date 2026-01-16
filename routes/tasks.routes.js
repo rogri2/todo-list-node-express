@@ -2,20 +2,12 @@ const express = require('express');
 const controller = require('../controller/tasks.controller');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the ToDo API' });
-});
+router.get('/', controller.getAllTasks);
 
-router.post('/', (req, res) => {
+router.post('/', controller.createTask);
 
-});
+router.put('/:id', controller.updateTask);
 
-router.put('/:id', (req, res) => {
-
-});
-
-router.delete('/:id', (req, res) => {
-
-});
+router.delete('/:id', controller.deleteTask);
 
 module.exports = router;
