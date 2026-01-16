@@ -4,9 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List!</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Welcome to the To-Do List App</h1>
+    <form id="taskForm">
+      <label for="taskName">To do:</label>
+      <input type="text" name="" id="taskName" required />
+      <br />
+      <label for="taskDescription">Description:</label>
+      <input type="text" name="" id="taskDescription" />
+      <br />
+      <button class="taskButton">➕</button>
+    </form>
+    <div class="tasks">
+      <!-- Task items will be added here dynamically -->
+      <h1>Task List</h1>
+      <div id="taskList">
+        <!-- Individual tasks will be appended here -->
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
