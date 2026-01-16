@@ -24,7 +24,7 @@ async function fetchToDoList() {
     <div class="checkboxWrapper">
       <input type="checkbox" name="task" class="taskCheckbox" ${task.completed ? 'checked' : ''} />
     </div>
-    <div class="taskInfo">
+    <div class="taskInfo hasModal">
       <div class="titleWrapper">
         <p class="taskTitle">${task.title}</p>
       </div>
@@ -108,7 +108,7 @@ const modalDescription = document.getElementById('modalDescription');
 const modalClose = document.getElementById('modalClose');
 
 list.addEventListener('click', (e) => {
-  const descriptionWrapper = e.target.closest('.descriptionWrapper');
+  const descriptionWrapper = e.target.closest('.hasModal');
   if (!descriptionWrapper) return;
   const taskItem = e.target.closest('.taskClass');
   const title = taskItem.querySelector('.taskTitle').textContent;

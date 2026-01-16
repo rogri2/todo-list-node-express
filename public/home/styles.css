@@ -123,17 +123,27 @@ body {
   align-items: center;
   justify-content: center;
   height: 15%;
+  width: 80%;
+}
+
+.titleWrapper p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .descriptionWrapper {
   width: 80%;
-  cursor: pointer;
 }
 
 .descriptionWrapper p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.hasModal {
+  cursor: pointer;
 }
 
 .modal {
