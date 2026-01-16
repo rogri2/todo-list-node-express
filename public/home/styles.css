@@ -1,4 +1,181 @@
+:root {
+  --primary-color: #215e61;
+  --secondary-color: #233d4d;
+  --accent-color: #fe7f2d;
+  --background-color: #f5fbe6;
+}
+
 body {
-  background-color: midnightblue;
-  color: antiquewhite;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  font-family: "Google Sans", sans-serif;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainTitle {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.formContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formBox {
+  border: 1px solid var(--accent-color);
+  padding: 20px;
+  margin: 20px;
+  width: 300px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formBox input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+}
+
+#submitButtonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#submitButtonWrapper .taskButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.taskButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary-color);
+  font-size: 1.2em;
+  transition: 0.2s;
+}
+
+.taskButton:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.taskClass {
+  width: 300px;
+  height: 100px;
+  border: 1px solid var(--accent-color);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.taskClass:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+.checkboxWrapper {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.taskInfo {
+  width: 70%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.taskActions {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.taskTitle {
+  text-align: center;
+  font-weight: bold;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15%;
+}
+
+.descriptionWrapper {
+  width: 80%;
+  cursor: pointer;
+}
+
+.descriptionWrapper p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalContent {
+  background-color: var(--background-color);
+  color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modalClose {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--secondary-color);
+  cursor: pointer;
 }

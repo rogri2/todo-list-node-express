@@ -19,11 +19,38 @@ async function fetchToDoList() {
     const taskItem = document.createElement('div');
     taskItem.className = 'taskClass';
     taskItem.id = task.id;
-    taskItem.innerHTML = `
+    taskItem.innerHTML =
+      task.description !== '' ? `
+    <div class="checkboxWrapper">
       <input type="checkbox" name="task" class="taskCheckbox" ${task.completed ? 'checked' : ''} />
-      <label style="font-weight: bold">${task.title}</label>
-      ${task.description !== '' ? `<label>${task.description}</label>` : ''}
-      <button class="taskDelete taskButton">🗑️</button>
+    </div>
+    <div class="taskInfo">
+      <div class="titleWrapper">
+        <p class="taskTitle">${task.title}</p>
+      </div>
+      <div class="descriptionWrapper">
+        <p class="taskDescription">
+          ${task.description}
+        </p>
+      </div>
+    </div>
+    <div class="taskActions">
+      <button class="taskDelete taskButton button" type="button">
+        <ion-icon name="trash-outline"></ion-icon>
+      </button>
+    </div>
+    ` : `
+    <div class="checkboxWrapper">
+      <input type="checkbox" name="task" class="taskCheckbox" ${task.completed ? 'checked' : ''} />
+    </div>
+    <div class="taskInfo">
+      <p class="taskTitle">${task.title}</p>
+    </div>
+    <div class="taskActions">
+      <button class="taskDelete taskButton button" type="button">
+        <ion-icon name="trash-outline"></ion-icon>
+      </button>
+    </div>
     `;
     list.appendChild(taskItem);
   });
@@ -41,8 +68,8 @@ async function toggleTask(id, checkbox) {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = {
-    title: taskName.value,
-    description: taskDescription.value,
+    title: taskName.value.trim(),
+    description: taskDescription.value.trim(),
   }
 
   await fetch(API_URL, {
@@ -65,12 +92,46 @@ list.addEventListener('change', async (e) => {
 });
 
 list.addEventListener('click', async (e) => {
-  if (!e.target.classList.contains('taskDelete')) return;
+  const deleteBtn = e.target.closest('.taskDelete');
+  if (!deleteBtn) return;
+
   const taskItem = e.target.closest('.taskClass');
   await fetch(`${API_URL}/${taskItem.id}`, {
     method: 'DELETE',
   });
   fetchToDoList();
 });
+
+const modal = document.getElementById('taskModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const modalClose = document.getElementById('modalClose');
+
+list.addEventListener('click', (e) => {
+  const descriptionWrapper = e.target.closest('.descriptionWrapper');
+  if (!descriptionWrapper) return;
+  const taskItem = e.target.closest('.taskClass');
+  const title = taskItem.querySelector('.taskTitle').textContent;
+  const description = taskItem.querySelector('.taskDescription').textContent;
+  openModal(title, description);
+  modal.classList.remove('hidden')
+})
+
+modalClose.addEventListener('click', closeModal)
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    closeModal()
+  }
+})
+
+function openModal(title, description) {
+  modalTitle.textContent = title;
+  modalDescription.textContent = description;
+  modal.classList.add('show')
+}
+
+function closeModal() {
+  modal.classList.remove('show')
+}
 
 fetchToDoList();

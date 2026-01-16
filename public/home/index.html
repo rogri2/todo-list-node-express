@@ -5,25 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List!</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Welcome to the To-Do List App</h1>
-    <form id="taskForm">
-      <label for="taskName">To do:</label>
-      <input type="text" name="" id="taskName" required />
-      <br />
-      <label for="taskDescription">Description:</label>
-      <input type="text" name="" id="taskDescription" />
-      <br />
-      <button class="taskButton">➕</button>
-    </form>
+    <h1 class="mainTitle">Bienvenido a la lista de tareas!</h1>
+    <div class="formContainer">
+      <div class="formBox">
+        <form id="taskForm">
+          <label for="taskName">Tarea:</label>
+          <input type="text" name="title" id="taskName" required />
+          <br />
+          <label for="taskDescription">Descripción:</label>
+          <input type="text" name="description" id="taskDescription" />
+          <br />
+          <div id="submitButtonWrapper">
+            <button class="taskButton">
+              <ion-icon name="add-circle-outline"></ion-icon>Agregar tarea
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="tasks">
-      <!-- Task items will be added here dynamically -->
-      <h1>Task List</h1>
+      <h2>Lista de tareas:</h2>
       <div id="taskList">
         <!-- Individual tasks will be appended here -->
       </div>
     </div>
+    <div id="taskModal" class="modal">
+      <div class="modalContent">
+        <span id="modalClose" class="modalClose">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
     <script src="script.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
