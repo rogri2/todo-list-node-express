@@ -142,10 +142,6 @@ body {
   white-space: nowrap;
 }
 
-.hasModal {
-  cursor: pointer;
-}
-
 .modal {
   position: fixed;
   top: 0;
@@ -188,4 +184,12 @@ body {
   font-weight: bold;
   color: var(--secondary-color);
   cursor: pointer;
+}
+
+.is-overflow {
+  cursor: pointer;
+}
+
+.is-overflow:hover {
+  text-decoration: underline;
 }

@@ -24,7 +24,7 @@ async function fetchToDoList() {
     <div class="checkboxWrapper">
       <input type="checkbox" name="task" class="taskCheckbox" ${task.completed ? 'checked' : ''} />
     </div>
-    <div class="taskInfo hasModal">
+    <div class="taskInfo">
       <div class="titleWrapper">
         <p class="taskTitle">${task.title}</p>
       </div>
@@ -44,7 +44,9 @@ async function fetchToDoList() {
       <input type="checkbox" name="task" class="taskCheckbox" ${task.completed ? 'checked' : ''} />
     </div>
     <div class="taskInfo">
-      <p class="taskTitle">${task.title}</p>
+      <div class="titleWrapper">
+        <p class="taskTitle">${task.title}</p>
+      </div>
     </div>
     <div class="taskActions">
       <button class="taskDelete taskButton button" type="button">
@@ -53,6 +55,15 @@ async function fetchToDoList() {
     </div>
     `;
     list.appendChild(taskItem);
+
+    requestAnimationFrame(() => {
+      const titleElement = taskItem.querySelector('.taskTitle');
+      markOverflow(titleElement);
+      if (task.description !== '') {
+        const descriptionElement = taskItem.querySelector('.taskDescription');
+        markOverflow(descriptionElement);
+      }
+    });
   });
 }
 
@@ -108,12 +119,18 @@ const modalDescription = document.getElementById('modalDescription');
 const modalClose = document.getElementById('modalClose');
 
 list.addEventListener('click', (e) => {
-  const descriptionWrapper = e.target.closest('.hasModal');
-  if (!descriptionWrapper) return;
-  const taskItem = e.target.closest('.taskClass');
-  const title = taskItem.querySelector('.taskTitle').textContent;
-  const description = taskItem.querySelector('.taskDescription').textContent;
-  openModal(title, description);
+  const taskInfo = e.target.closest('.taskInfo');
+  if (!taskInfo) return;
+
+  const titleElement = taskInfo.querySelector('.taskTitle');
+  const descriptionElement = taskInfo.querySelector('.taskDescription');
+
+  const titleOverflow = titleElement && hasOverflow(titleElement);
+  const descriptionOverflow = descriptionElement && hasOverflow(descriptionElement);
+
+  if (!titleOverflow && !descriptionOverflow) return;
+
+  openModal(titleElement.textContent, descriptionElement ? descriptionElement.textContent : '');
   modal.classList.remove('hidden')
 })
 
@@ -132,6 +149,16 @@ function openModal(title, description) {
 
 function closeModal() {
   modal.classList.remove('show')
+}
+
+function hasOverflow(element) {
+  return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+}
+
+function markOverflow(element) {
+  if (hasOverflow(element)) {
+    element.classList.add('is-overflow');
+  }
 }
 
 fetchToDoList();
